@@ -1,0 +1,58 @@
+import pandas as pd
+
+df = pd.read_csv("messy_employees.csv")
+
+#Load the data and get the overview of mess and missing things or junk 
+
+# print(df.head())       # Show first few rows
+# print(df.info())       # Check datatypes and missing values
+# print(df.describe())   # Summary of numeric columns
+
+#Remove column named JunkColumn(No use)
+df.drop("JunkColumn", axis=1, inplace=True)
+
+
+#Drop the duplicates found 
+
+df.drop_duplicates(inplace=True)
+
+#Checking missing Values
+
+print(df.isna().sum())
+
+#Fix the Null values of "Age" Column
+
+df["Age"] = df["Age"].fillna(26)  # Works in pandas 3.0 (First i was using inplace=True so a warning occured!
+
+
+#Fix the "Experience" column null values and also make ten into an integer as 10
+
+df["Experience"]= df["Experience"].replace("Ten",10) #Replace Ten with 10 
+
+df["Experience"] = pd.to_numeric(df["Experience"])  #Converts all into numeric values like "10" becomes 10 but not ten into 10 (Thats invalid)
+
+df["Experience"] = df["Experience"].fillna(df["Experience"].mean())
+
+
+#Filling null values for "Salary" Column
+
+df["Salary"] = df["Salary"].fillna(df["Salary"].mean())
+
+# Clean Inconsistent Department Names
+
+df["Department"] = df["Department"].str.strip().str.lower() #
+
+df["Department"] = df["Department"].replace({
+    "i.t.": "it",
+    "information tech": "it",
+    "sales": "sales",
+    "hr": "hr",
+    "finance": "finance"
+})
+
+df["Emp_Name"] = df["Emp_Name"].str.replace(r"[^a-zA-Z ]", "", regex=True)
+
+df = df.reset_index(drop=True)
+
+print(df.head(10))
+df.to_csv("cleaned_employees.csv", index=False)

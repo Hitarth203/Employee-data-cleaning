@@ -1,0 +1,14 @@
+Emp_ID,Emp_Name,Age,Department,Salary,Experience,JunkColumn
+101,Aman,28,Sales,50000,3,$$$
+102,Sneha,NaN,IT,60000,5,###
+103,Raj,35,I.T.,NaN,Ten,N/A
+104,Anjali,29,HR,58000,4,123
+105,Anuj@,45,Sales,55000,8,
+106,Reena,32,it,48000,3,$$$
+107,Ravi,NaN,Information Tech,47000,2,###
+108,Anju123,27,Finance,52000,,###
+109,Nikita,28,Finance,52000,3,N/A
+102,Sneha,NaN,IT,60000,5,###  # duplicate row
+
+
+
